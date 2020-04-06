@@ -1,5 +1,8 @@
 from lib.keys import Key
 from scipy.spatial import distance
+import logging
+
+logger = logging.getLogger(__name__)
 
 """
   1(0,0)  2(0,1)  3(0,2)
@@ -10,10 +13,11 @@ from scipy.spatial import distance
 
 
 class Dialer:
+    LEFT_INIT_POS = '*'
+    RIGHT_INIT_POS = '#'
 
     def __init__(self):
         self.positions = {}
-        self.numbers = "0123456789*#"
         self.positions['0'] = Key(3, 1)
         self.positions['1'] = Key(0, 0)
         self.positions['2'] = Key(0, 1)
@@ -27,36 +31,45 @@ class Dialer:
         self.positions['*'] = Key(3, 0)
         self.positions['#'] = Key(3, 2)
 
-        self.left_postion = '*'
-        self.right_position = '#'
+        self.left_postion = self.LEFT_INIT_POS
+        self.right_position = self.RIGHT_INIT_POS
+
         self.history = [(self.left_postion, self.right_position)]
+
         self.combined_euclidian_distance = []
 
     def dial(self, num):
+        logger.info(f"Current Position--->({self.left_postion}, {self.right_position})")
 
         ec_dist_l = self.get_distance(self.left_postion, num)
+        logger.info(f"Eucldian distabce w.r.t left finger is: {ec_dist_l}")
         ec_dist_r = self.get_distance(self.right_position, num)
+        logger.info(f"Eucldian distabce w.r.t rightfinger is: {ec_dist_r}")
 
         both_fingers_movement = ec_dist_r + ec_dist_l
         self.combined_euclidian_distance.append(both_fingers_movement)
 
         if ec_dist_r == ec_dist_l:
+            logger.warning("Euclidian distance are eqal, moving left finger by default")
+            logger.info(f"Moving  left finger to {num} from self.left_position")
             self.move_left(num)
 
         if ec_dist_r < ec_dist_l:
+            logger.info(f"Moving  right finger to {num} from self.right_position")
             self.move_right(num)
-            dist = ec_dist_r
         elif ec_dist_l < ec_dist_r:
+            logger.info(f"Moving  left finger to {num} from self.left_position")
             self.move_left(num)
-            dist = ec_dist_l
+
+        logger.info(f"Updated Position--->({self.left_postion}, {self.right_position})")
 
         self.history.append((self.left_postion, self.right_position))
+        logger.info(f"Dial History------->{self.history}\n\n\n")
 
     def get_distance(self, pos, new_pos):
         cur = self.positions[pos].cord()
         new = self.positions[new_pos].cord()
-        dist = distance.euclidean(cur, new)
-        return dist
+        return distance.euclidean(cur, new)
 
     def move_right(self, num):
         self.right_position = num
