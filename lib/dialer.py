@@ -48,6 +48,7 @@ class Dialer:
 
         both_fingers_movement = ec_dist_r + ec_dist_l
         self.combined_euclidian_distance.append(both_fingers_movement)
+        logger.info(f"combined euclidian distance: {self.combined_euclidian_distance}")
 
         if ec_dist_r == ec_dist_l:
             logger.warning("Euclidian distance are eqal, moving left finger by default")
