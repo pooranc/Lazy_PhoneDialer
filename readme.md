@@ -43,4 +43,5 @@ The space complexity is O(1), a constant k, k being the number of keys.
 # Arguments
 
  - number -> python main.py --number 195
- if arfuments are not passed default phone number "110" is used to generate the tuple .
+ 
+ if arguments are not passed default phone number "110" is used to generate the tuple .
