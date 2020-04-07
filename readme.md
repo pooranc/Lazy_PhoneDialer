@@ -5,14 +5,13 @@ Laziest Way to dial a n-digit number on a standard push button telephone.
 List of requirements :
 - Standard Telephone button layout, so Assumptions digit “1” at a position (0,0) likewise; 
 
-* *
-"""
+```
   1(0,0)  2(0,1)  3(0,2)
   4(1,0)  5(1,1)  6(1,2)
   7(2,0)  8(2,1)  9(2,2)
   *(3,0)  0(3,1)  #(3,2)
-"""
-* *
+```
+
 
 - Starting finger position is at * and #
 - Need a Euclidian distance method to calculate the distance between the current digit input position and the digit’s position on the     left and right fingers. Note: “SciPy.Spatial” library is used to calculate the Euclidean distance between 2 points.
