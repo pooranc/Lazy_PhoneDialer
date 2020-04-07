@@ -30,9 +30,9 @@ https://github.com/pooranc/Lazy_PhoneDialer
 3. Euclidian distance is calculated with respect to (w.r.t) Left and right fingers,
 4. The combined distance of both fingers is stored.
 5. Movement of the fingers is decided based on the distance values
-    a.	If the distance is equal w.r.t both the fingers, the left finger is given the priority to move position.
-    b.	Distance wr.t right finger is less than w.r.t left finger, the right finger is moved to a new position
-    c.	Vice versa w.r.t left finger
+    1.	If the distance is equal w.r.t both the fingers, the left finger is given the priority to move position.
+    2.	Distance wr.t right finger is less than w.r.t left finger, the right finger is moved to a new position
+    3.	Vice versa w.r.t left finger
 
 # Complexity: 
 
