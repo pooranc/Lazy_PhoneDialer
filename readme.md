@@ -2,7 +2,7 @@
 
 Laziest Way to dial a n-digit number on a standard push button telephone.
 
-List of requirements :
+#List of requirements :
 - Standard Telephone button layout, so Assumptions digit “1” at a position (0,0) likewise; 
 
 ```
@@ -19,11 +19,11 @@ List of requirements :
 - The smallest amount of Euclidian distance both fingers combined to dial phone number. 
  
 
-**Implementation link: **
+#Implementation link: 
 
 https://github.com/pooranc/Lazy_PhoneDialer 
 
-**Idea: **
+#Idea:
 
 1. Each digit in the telephone number is passed to dial() in dialer.py class
 2. The first position of the fingers is assumed to be at * and #, so this will be the current position of fingers. 
@@ -34,7 +34,7 @@ https://github.com/pooranc/Lazy_PhoneDialer
     b.	Distance wr.t right finger is less than w.r.t left finger, the right finger is moved to a new position
     c.	Vice versa w.r.t left finger
 
-**Complexity: **
+#Complexity: 
 
 The time complexity is O(n), n being the number of digits in the telephone number. As each digit is passed to the algorithm in a for loop.
 
