@@ -1,6 +1,5 @@
 from lib.utils import compute_laziest_path
 import argparse
-import logging
 import logging.config
 
 logging.config.fileConfig(fname='file.conf', disable_existing_loggers=False)

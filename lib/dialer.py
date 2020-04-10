@@ -5,13 +5,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 """
-  1(0,0)  2(0,1)  3(0,2)
-  4(1,0)  5(1,1)  6(1,2)
-  7(2,0)  8(2,1)  9(2,2)
-  *(3,0)  0(3,1)  #(3,2)
+This class initializes a each digit to specific position, like a standard telephone button layout
+        1(0,0)  2(0,1)  3(0,2)
+        4(1,0)  5(1,1)  6(1,2)
+        7(2,0)  8(2,1)  9(2,2)
+        *(3,0)  0(3,1)  #(3,2)
+Along with the initial position of the left and right finger which is at "*" and "#" respectively.
+and important dial method which populates the tuple.        
 """
-
-
 class Dialer:
     LEFT_INIT_POS = '*'
     RIGHT_INIT_POS = '#'
@@ -39,6 +40,13 @@ class Dialer:
         self.combined_euclidian_distance = []
 
     def dial(self, num):
+        """
+        This method would take single digit of the telephone number and calculate the
+        euclidian distance with respect to left and right finger position to digit passed in argument.
+        Then based on the the 3 decision populate the tuple of combined euclidian distance and the history of finger movement
+        example: (4.0, [('*', '#'), ('1', '#'), ('1', '#'), ('1', '0')]) for Telephone number "110"
+        :param num: a single digit of the telephone number
+        """
         logger.info(f"Current Position--->({self.left_postion}, {self.right_position})")
 
         ec_dist_l = self.get_distance(self.left_postion, num)
@@ -68,17 +76,35 @@ class Dialer:
         logger.info(f"Dial History------->{self.history}\n\n\n")
 
     def get_distance(self, pos, new_pos):
+        """
+        This method gets the position of the finger digit and new digit position
+        and calculates the euclidian distance.
+        :param pos: current finger digit
+        :param new_pos: new digit
+        :return: euclidian distance of two positions
+        """
         cur = self.positions[pos].cord()
         new = self.positions[new_pos].cord()
         return distance.euclidean(cur, new)
 
     def move_right(self, num):
+        """
+        Updating the right finger position
+        :param num: New postion the right finger need to dial
+        """
         self.right_position = num
 
     def move_left(self, num):
+        """
+        Updating the left finger position
+        :param num: New postion the left finger need to dial
+        """
         self.left_postion = num
 
     def get_min_distance(self):
+        """
+        This method Takes the minmum distance and rounds into integer
+        """
         return round(min(self.combined_euclidian_distance))
 
     def get_history(self):
